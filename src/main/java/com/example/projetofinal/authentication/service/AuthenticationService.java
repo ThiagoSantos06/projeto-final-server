@@ -16,7 +16,7 @@ public class AuthenticationService {
         this.userRepository = userRepository;
     }
 
-    public void signIn(SignInForm form) {
+    public String signIn(SignInForm form) {
         User user = userRepository.findByUsername(form.username());
         if (user == null) {
             throw new APIException("User not found", HttpStatus.NOT_FOUND);
@@ -25,6 +25,8 @@ public class AuthenticationService {
         if (!user.getPassword().equals(form.password())) {
             throw new APIException("Username or password is incorrect", HttpStatus.UNAUTHORIZED);
         }
+
+        return user.getName();
     }
 
 }

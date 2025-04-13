@@ -17,7 +17,7 @@ public class AuthenticationController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void signIn(@RequestBody @Valid SignInForm form) {
-        authenticationService.signIn(form);
+    public SignInResponse signIn(@RequestBody @Valid SignInForm form) {
+        return new SignInResponse(authenticationService.signIn(form));
     }
 }
