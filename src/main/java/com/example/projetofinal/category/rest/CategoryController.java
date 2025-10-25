@@ -24,6 +24,25 @@ public class CategoryController {
 
     @GetMapping
     public List<Category> getAllCategories() {
-        return categoryService.getCategories();
+        List<Category> categories = categoryService.getCategories();
+
+        // DEBUG - Verifica se os IDs estão vindo
+        System.out.println("=== DEBUG CATEGORY CONTROLLER ===");
+        System.out.println("Total de categorias: " + categories.size());
+
+        if (categories.isEmpty()) {
+            System.out.println("❌ Nenhuma categoria encontrada!");
+        } else {
+            categories.forEach(cat -> {
+                System.out.println("🔍 Category ID: " + cat.getId() + ", Name: " + cat.getName());
+
+                // Verifica se o ID é null
+                if (cat.getId() == null) {
+                    System.out.println("⚠️  ATENÇÃO: Category '" + cat.getName() + "' tem ID NULL!");
+                }
+            });
+        }
+
+        return categories;
     }
 }

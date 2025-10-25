@@ -19,19 +19,24 @@ public class User {
     @Column(nullable = false)
     private String name;
 
+    // 👇 Novo campo
+    @Column(nullable = false)
+    private String role = "user"; // valor padrão
+
     public User(SignUpForm form) {
         this.username = form.username();
         this.password = form.password();
         this.name = form.name();
+        this.role = "user"; // 👈 padrão para novos cadastros
     }
 
     public User() {}
 
-    public String getPassword() {
-        return password;
-    }
+    public Long getId() { return id; }
+    public String getUsername() { return username; }
+    public String getPassword() { return password; }
+    public String getName() { return name; }
+    public String getRole() { return role; }
 
-    public String getName() {
-        return name;
-    }
+    public void setRole(String role) { this.role = role; }
 }
