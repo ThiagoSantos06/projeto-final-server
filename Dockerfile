@@ -1,16 +1,18 @@
-FROM maven:3.9.6-eclipse-temurin-17 AS build
+FROM eclipse-temurin:17-jdk AS build
+
 WORKDIR /app
 
-COPY pom.xml .
+COPY pom.xml ./
 COPY src ./src
 
-RUN mvn clean package -DskipTests
+RUN ./mvnw -q -DskipTests package || mvn -q -DskipTests package
 
-FROM eclipse-temurin:17-jdk-alpine
+FROM eclipse-temurin:17-jdk
+
 WORKDIR /app
 
 COPY --from=build /app/target/*.jar app.jar
 
 EXPOSE 8080
 
-CMD ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
