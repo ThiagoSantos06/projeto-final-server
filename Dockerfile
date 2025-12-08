@@ -15,7 +15,7 @@ RUN mvn -q -DskipTests package
 
 
 # Etapa final: executa o jar
-FROM eclipse-temurin:17-jdk
+FROM eclipse-temurin:21-jdk
 
 WORKDIR /app
 
