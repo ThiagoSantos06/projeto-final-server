@@ -4,6 +4,7 @@ import com.example.projetofinal.user.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:8000")
 @RestController
 @RequestMapping("/user")
 public class UserController {
